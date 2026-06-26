@@ -1,9 +1,12 @@
 # UPY-PROGRAMMING-KEYRA-POOL-Q2-2026
 
-Se declara el uso de herramientas de Inteligencia Artificial (Gemini) en el desarrollo de este repositorio.
+Repositorio de actividades y proyectos realizados durante el curso de Programación en la Universidad Politécnica de Yucatán (UPY).
 
-El material correspondiente a código lógico (`.py`), pseudocódigo (`.txt`) y la organización de las tareas fue desarrollado por la autora con base en lo aprendido en clase.
+Aquí se almacenan prácticas, ejercicios y proyectos desarrollados en Python, utilizando Git y GitHub para el control de versiones.
 
-La IA fue utilizada exclusivamente para:
-1.  Asistencia técnica en el manejo de comandos de terminal y Git (organización de carpetas y solución de errores como `.DS_Store`).
-2.  La generación del archivo visual del diagrama (`DIAGRAMA.jpg`) incluido en `classwork08`.
+Alumno: Keyra Pool
+Profesor: Jorge Javier Pedrozo
+Cuatrimestre: 2-B
+
+IA Declaration:
+Se utilizó inteligencia artificial (ChatGPT, Gemini) como herramienta de apoyo para resolver dudas, generar documentación y elaborar diagramas de flujo. Todo el trabajo entregado fue revisado y comprendido antes de su entrega.
