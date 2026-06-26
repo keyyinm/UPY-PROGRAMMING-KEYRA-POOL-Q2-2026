@@ -1,0 +1,20 @@
+#INPUT
+Get verb
+
+#PROCESS
+pronouns <- ['Yo', 'Tú', 'Él', 'Nosotros', 'Vosotros', 'Ellos']
+endings <- {
+     'ar': ['o', 'as', 'a', 'amos', 'áis', 'an'],
+     'er': ['o', 'es', 'e', 'emos', 'éis', 'en'],
+     'ir': ['o', 'es', 'e', 'imos', 'ís', 'en']
+    }
+stem <- SUBCADENA(verb, 1, LONGITUD(verb) - 2)
+ending <- SUFIJO_DE_DOS_LETRAS(verb)
+ending_list <- endings[ending]
+
+#OUTPUT
+PARA index DESDE 0 HASTA LONGITUD(pronouns) - 1 HACER
+     pronoun <- pronouns[index]
+     end <- ending_list[index]
+     ESCRIBIR pronoun + " " + stem + end
+FIN PARA
