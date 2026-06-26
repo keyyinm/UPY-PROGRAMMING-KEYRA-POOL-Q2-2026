@@ -1,0 +1,89 @@
+# INPUT
+
+Get username
+Get password
+
+# PROCESS
+
+usuarios <- Dictionary with users, passwords, roles and names
+
+subjects <- Tuple with all subjects
+
+notes <- Dictionary with students and grades
+
+logged_in <- False
+
+WHILE logged_in = False
+
+```
+IF username exists AND password is correct THEN
+    logged_in <- True
+    rol <- user role
+    nombre <- user name
+ELSE
+    Show error message
+END IF
+```
+
+END WHILE
+
+IF rol = "alumno" THEN
+
+```
+pendientes <- Empty list
+
+FOR each subject in subjects
+
+    nota <- Student grade
+
+    IF nota < 7 THEN
+        Add subject to pendientes
+    END IF
+
+END FOR
+```
+
+ELSE IF rol = "maestro" THEN
+
+```
+WHILE user does not write "exit"
+
+    Show students
+
+    Get student username
+
+    IF username exists THEN
+
+        Show subjects
+
+        Get subject
+
+        IF subject exists THEN
+
+            Get new grade
+
+            Show confirmation
+
+            IF confirmation = "yes" THEN
+                Update grade
+            END IF
+
+        END IF
+
+    END IF
+
+END WHILE
+```
+
+ELSE IF rol = "coordinador" THEN
+
+```
+Show professors
+
+Show students
+
+FOR each subject
+
+   
+```
+
