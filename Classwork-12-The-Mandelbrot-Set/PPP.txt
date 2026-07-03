@@ -1,0 +1,68 @@
+#INPUT
+
+Create an empty configuration dictionary
+
+Open "config.txt" for reading
+
+FOR EACH line in the configuration file DO
+
+    Split the line into key and value using "="
+
+    IF the value contains "." THEN
+        Convert the value to decimal
+    ELSE
+        Convert the value to integer
+    ENDIF
+
+    Store the key and value in the configuration dictionary
+
+ENDFOR
+
+Close the configuration file
+
+Open "clase.csv" for reading
+
+Read all lines from the CSV file
+
+Close the CSV file
+
+height ← configuration["alto"]
+width ← configuration["ancho"]
+max_iterations ← configuration["max_iter"]
+
+Create a new HSV image with width and height
+
+Remove the first line of the CSV data (header)
+
+#PROCESS
+
+FOR EACH remaining line in the CSV file DO
+
+    Split the line into row, column and iterations
+
+    Convert row, column and iterations to integers
+
+    IF iterations is equal to max_iterations THEN
+
+        brightness ← 0
+
+    ELSE
+
+        brightness ← (iterations / max_iterations) × 255
+
+    ENDIF
+
+    Set the pixel at (column, row) using HSV color
+    Hue ← brightness
+    Saturation ← 255
+    Value ← 255
+
+ENDFOR
+
+Convert the HSV image to RGB
+
+Save the image as "mandelbrot-clase.png"
+
+#OUTPUT
+
+Display "DONE"
