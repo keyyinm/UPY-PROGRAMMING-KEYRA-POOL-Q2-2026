@@ -1,0 +1,62 @@
+#INPUT
+
+Create an empty configuration dictionary
+
+Open "config.txt" for reading
+
+#PROCESS
+
+FOR EACH line in the configuration file DO
+
+    Split the line into key and value using "="
+
+    Convert value to decimal
+
+    Store key and value in the configuration dictionary
+
+ENDFOR
+
+Close the configuration file
+
+width ← integer value of configuration["ancho"]
+height ← integer value of configuration["alto"]
+max_iterations ← integer value of configuration["max_iter"]
+
+Open "clase.csv" for writing
+
+Write "fila,columna,iteraciones" as the header
+
+FOR row FROM 0 TO height - 1 DO
+
+    FOR column FROM 0 TO width - 1 DO
+
+        real ← real_min + (column / width) × (real_max - real_min)
+
+        imaginary ← imag_min + (row / height) × (imag_max - imag_min)
+
+        c ← complex number formed by real and imaginary
+
+        z ← 0
+
+        iterations ← 0
+
+        WHILE absolute value of z is less than or equal to 2
+        AND iterations is less than max_iterations DO
+
+            z ← z × z + c
+
+            iterations ← iterations + 1
+
+        ENDWHILE
+
+        Write row, column and iterations to the CSV file
+
+    ENDFOR
+
+ENDFOR
+
+Close the CSV file
+
+#OUTPUT
+
+Display "DONE"
