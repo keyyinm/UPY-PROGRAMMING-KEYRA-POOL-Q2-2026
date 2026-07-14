@@ -1,0 +1,3 @@
+# Declaración de Uso de IA
+Actividad: Classwork #14 - Error Handling (CW-10 a CW-12)
+Uso de IA: Se utilizó Gemini para corregir y mejorar el código de las tres tareas anteriores, agregándole bloques `try-except` y `with open` para que los programas no se rompan si el usuario escribe algo mal o si faltan archivos. Además, este mismo texto de declaración fue generado con la ayuda de la IA.
