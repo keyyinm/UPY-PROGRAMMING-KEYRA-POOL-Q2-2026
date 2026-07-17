@@ -2,14 +2,6 @@ import random
 import stddraw
 from color import Color
 
-#BUBBLE SORT
-def bubble_sort(numbers):
-    n = len(numbers)
-    for sweep in range(n):
-        for pair in range(0, n - 1 - sweep):
-            if numbers[pair] > numbers[pair + 1]:
-                numbers[pair], numbers[pair + 1] = numbers[pair + 1], numbers[pair]
-
 def draw_bars(numbers, selected=()):
     stddraw.clear()
     n = len(numbers)
@@ -23,6 +15,15 @@ def draw_bars(numbers, selected=()):
         stddraw.setPenColor(bar_color)
         stddraw.filledRectangle(x - bar_width / 2, 0, bar_width * 0.9, number)
     stddraw.show(500)
+    
+#BUBBLE SORT
+def bubble_sort(numbers):
+    n = len(numbers)
+    for sweep in range(n):
+        for pair in range(0, n - 1 - sweep):
+            if numbers[pair] > numbers[pair + 1]:
+                numbers[pair], numbers[pair + 1] = numbers[pair + 1], numbers[pair]
+
     
 def bubble_sort_animated(numbers):
     stddraw.setXscale(-0.1, 10)
@@ -46,6 +47,19 @@ def bubble_sort_animated(numbers):
 
 
 #INSERTION SORT
+    
+def insertion_sort(numbers):
+    n = len(numbers)
+
+    for i in range(1, n):
+        key = numbers[i]
+        j = i - 1
+
+        while j >= 0 and numbers[j] > key:
+            numbers[j + 1] = numbers[j]
+            j -= 1
+            numbers[j + 1] = key
+
 def insertion_sort_animated(numbers):
     stddraw.setXscale(-0.1, 10)
     stddraw.setYscale(-0.5, max(numbers) + 1)
@@ -62,15 +76,23 @@ def insertion_sort_animated(numbers):
             j -= 1
             numbers[j + 1] = key
             draw_bars(numbers, selected=(j +1,))
-            
-
-        
-        #draw_bars(numbers, selected=(j + 1,))
 
     draw_bars(numbers)
     stddraw.show()
 
 #SELECTION SORT
+    
+def selection_sort(numbers):
+    n = len(numbers)
+
+    for i in range(n):
+        min_index = i
+
+        for j in range(i + 1, n):
+            if numbers[j] < numbers[min_index]:
+                min_index = j
+        numbers[i], numbers[min_index] = numbers[min_index], numbers[i]
+       
 def selection_sort_animated(numbers):
     stddraw.setXscale(-0.1, 10)
     stddraw.setYscale(-0.5, max(numbers) + 1)
@@ -95,8 +117,11 @@ def selection_sort_animated(numbers):
 # Generación de datos de prueba
 numbers = [random.randint(1, 100) for _ in range(10)]
 print(f"before bubble sort:{numbers}")
+#bubble_sort(numbers)
 #bubble_sort_animated(numbers)
-insertion_sort_animated(numbers)
+#insertion_sort(numbers)
+#insertion_sort_animated(numbers)
+#selection_sort(numbers)
 #selection_sort_animated(numbers)
 print(f"after bubble sort:{numbers}")
 
