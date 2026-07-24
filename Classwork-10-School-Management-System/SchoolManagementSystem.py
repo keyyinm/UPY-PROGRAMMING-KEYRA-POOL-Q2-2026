@@ -2,15 +2,15 @@
 
 # DATA
 
-usuarios = {
-    'keyrap': {'password': '150507', 'rol': 'alumno', 'nombre': 'Keyra Pool'},
-    'arcadiod': {'password': '040804', 'rol': 'alumno', 'nombre': 'Arcadio Dardon'},
-    'cristianc': {'password': '310702', 'rol': 'alumno', 'nombre': 'Cristian Cab'},
-    'alejandroh': {'password': '300307', 'rol': 'alumno', 'nombre': 'Alejandro Hernandez'},
-    'ivanr': {'password': '230402', 'rol': 'alumno', 'nombre': 'Ivan Rivas'},
-    'yamilf': {'password': '1234', 'rol': 'alumno', 'nombre': 'Yamil Farah'},
-    'jorgep': {'password': 'abcde', 'rol': 'maestro', 'nombre': 'Jorge Pedrozo'},
-    'didierg': {'password': '1234', 'rol': 'coordinador', 'nombre': 'Didier Gamboa'}
+users = {
+    'jperez': {'password': '1234', 'rol': 'student', 'name': 'Juan Pérez'},
+    'dromo': {'password': '1234', 'rol': 'student', 'name': 'Daniela Romo'},
+    'mjuarez': {'password': '1234', 'rol': 'student', 'name': 'Mauricio Juárez'},
+    'mlopez': {'password': '1234', 'rol': 'student', 'name': 'María López'},
+    'euc': {'password': '1234', 'rol': 'student', 'name': 'Ernesto Uc'},
+    'cbalam': {'password': '1234', 'rol': 'student', 'name': 'Carlos Balam'},
+    'jpedrozo': {'password': '1234', 'rol': 'professor', 'name': 'Jorge Pedrozo'},
+    'dgamboa': {'password': '1234', 'rol': 'coordinator', 'name': 'Didier Gamboa'}
 }
 
 subjects = (
@@ -24,7 +24,7 @@ subjects = (
 )
 
 notes = {
-    'keyrap': {
+    'jperez': {
         'Discrete Mathematics': 8.5,
         'Programming': 9.2,
         'English II': 9.0,
@@ -33,7 +33,7 @@ notes = {
         'Computer and Server Architecture': 6.8,
         'Socio-Emotional Skills and Conflict Management': 9.5
     },
-    'arcadiod': {
+    'dromo': {
         'Discrete Mathematics': 9.0,
         'Programming': 6.7,
         'English II': 9.4,
@@ -42,7 +42,7 @@ notes = {
         'Computer and Server Architecture': 6.5,
         'Socio-Emotional Skills and Conflict Management': 9.8
     },
-    'cristianc': {
+    'mjuarez': {
         'Discrete Mathematics': 7.5,
         'Programming': 8.0,
         'English II': 8.5,
@@ -51,7 +51,7 @@ notes = {
         'Computer and Server Architecture': 6.2,
         'Socio-Emotional Skills and Conflict Management': 8.9
     },
-    'alejandroh': {
+    'mlopez': {
         'Discrete Mathematics': 9.5,
         'Programming': 9.8,
         'English II': 9.2,
@@ -60,7 +60,7 @@ notes = {
         'Computer and Server Architecture': 9.4,
         'Socio-Emotional Skills and Conflict Management': 10.0
     },
-    'ivanr': {
+    'euc': {
         'Discrete Mathematics': 8.2,
         'Programming': 6.9,
         'English II': 8.8,
@@ -69,7 +69,7 @@ notes = {
         'Computer and Server Architecture': 8.1,
         'Socio-Emotional Skills and Conflict Management': 9.0
     },
-    'yamilf': {
+    'cbalam': {
         'Discrete Mathematics': 8.8,
         'Programming': 9.0,
         'English II': 8.5,
@@ -91,10 +91,10 @@ while not logged_in:
     password = input("Contraseña: ")
 
     # PROCESS
-    if username in usuarios and usuarios[username]["password"] == password:
+    if username in users and users[username]["password"] == password:
         logged_in = True
-        rol = usuarios[username]["rol"]
-        nombre = usuarios[username]["nombre"]
+        rol = users[username]["rol"]
+        nombre = users[username]["name"]
 
         # OUTPUT
         print(f"\nBienvenido, {nombre} ({rol})")
@@ -104,7 +104,7 @@ while not logged_in:
 
 # STUDENT MENU
 
-if rol == "alumno":
+if rol == "student":
 
     print(f"\nReport Card - {nombre}")
     print("=" * 40)
@@ -126,9 +126,9 @@ if rol == "alumno":
         for materia in pendientes:
             print("-", materia)
 
-# TEACHER MENU
+# PROFESSOR MENU
 
-elif rol == "maestro":
+elif rol == "professor":
 
     while True:
 
@@ -136,9 +136,9 @@ elif rol == "maestro":
         print("Students")
         print("===========================")
 
-        for usuario in usuarios:
-            if usuarios[usuario]["rol"] == "alumno":
-                print(f"User: {usuario} | Student: {usuarios[usuario]['nombre']}")
+        for usuario in users:
+            if users[usuario]["rol"] == "student":
+                print(f"User: {usuario} | Student: {users[usuario]['name']}")
 
         alumno = input("\nStudent to grade (username): ")
 
@@ -192,27 +192,27 @@ elif rol == "maestro":
         else:
             print("\nInvalid student.")
 
-    print("\nExiting teacher menu...")
-    
+    print("\nExiting professor menu...")
+
 # COORDINATOR MENU
 
-elif rol == "coordinador":
+elif rol == "coordinator":
 
     print("\n===========================")
     print("Professors")
     print("===========================")
 
-    for usuario in usuarios:
-        if usuarios[usuario]["rol"] == "maestro":
-            print(f"User: {usuario} | Professor: {usuarios[usuario]['nombre']}")
+    for usuario in users:
+        if users[usuario]["rol"] == "professor":
+            print(f"User: {usuario} | Professor: {users[usuario]['name']}")
 
     print("\n===========================")
     print("Students")
     print("===========================")
 
-    for usuario in usuarios:
-        if usuarios[usuario]["rol"] == "alumno":
-            print(f"User: {usuario} | Student: {usuarios[usuario]['nombre']}")
+    for usuario in users:
+        if users[usuario]["rol"] == "student":
+            print(f"User: {usuario} | Student: {users[usuario]['name']}")
 
     print("\n===========================")
     print("Records")
@@ -234,4 +234,3 @@ elif rol == "coordinador":
             fila += str(notes[alumno][materia]).ljust(12)
 
         print(fila)
-
