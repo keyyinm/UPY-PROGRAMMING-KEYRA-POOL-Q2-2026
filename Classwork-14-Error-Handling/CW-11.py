@@ -1,67 +1,68 @@
-
-# INPUT
 config = {}
 
+#INPUT
 try:
-    # Intenta abrir y procesar el archivo de configuración de manera segura
-    with open("config.txt", 'r') as archivo:
-        for linea in archivo:
-            # Quitamos espacios vacíos y omitimos líneas que no aporten datos
-            linea_limpia = linea.strip()
-            if not linea_limpia or "=" not in linea_limpia:
-                continue
-            
-            clave, valor = linea_limpia.split("=")
-            config[clave.strip()] = float(valor.strip())
-
-    # PROCESS
-    # Parsear y extraer de forma segura los valores enteros necesarios
-    ancho = int(config["ancho"])
-    alto = int(config["alto"])
-    max_iter = int(config["max_iter"])
-    
-    real_min = config["real_min"]
-    real_max = config["real_max"]
-    imag_min = config["imag_min"]
-    imag_max = config["imag_max"]
-
-    # Validación preventiva de seguridad matemática para evitar división entre cero
-    if ancho <= 0 or alto <= 0:
-        raise ValueError("El ancho y el alto en config.txt deben ser mayores a 0.")
-
-    # Generación y cálculo de la matriz de Mandelbrot guardando directo en CSV
-    with open("clase.csv", 'w') as salida:
-        salida.write("fila,columna,iteraciones\n")
-
-        for fila in range(alto):
-            for columna in range(ancho):
-                # Mapeo del plano complejo
-                real = real_min + (columna / ancho) * (real_max - real_min)
-                imag = imag_min + (fila / alto) * (imag_max - imag_min)
-                c = complex(real, imag)
-                
-                z = 0 + 0j
-                iteraciones = 0
-                
-                # Bucle de escape del fractal
-                while (abs(z) <= 2) and (iteraciones < max_iter):
-                    z = z * z + c
-                    iteraciones += 1
-                
-                # Escritura de resultados por pixel
-                salida.write(f"{fila},{columna},{iteraciones}\n")
-
-    # OUTPUT
-    print("DONE: Proceso matemático completado exitosamente y guardado en 'clase.csv'.")
-
-# ERROR HANDLING
+    archivo = open("config.txt", 'r')
 except FileNotFoundError:
-    print("Error Crítico: El archivo 'config.txt' es obligatorio y no fue encontrado en la ruta actual.")
-except ValueError as e:
-    print(f"Error de Datos: Comprueba el formato de 'config.txt'. Detalles: {e}")
+    print("Error: 'config.txt' not found. Make sure it is in the same folder.")
+    exit()
+
+#PROCESS
+try:
+    for linea in archivo:
+        clave, valor = linea.strip().split("=")
+        config[clave] = float(valor)
+except ValueError:
+    print("Error: 'config.txt' has an invalid line (expected format key=value).")
+    archivo.close()
+    exit()
+finally:
+    archivo.close()
+
+#PROCESS
+try:
+    ancho, alto, max_iter = int(config["ancho"]), int(config["alto"]), int(config["max_iter"])
 except KeyError as e:
-    print(f"Error de Configuración: Falta una variable requerida en config.txt: {e}")
+    print(f"Error: missing key {e} in 'config.txt'.")
+    exit()
+
+#OUTPUT
+try:
+    salida = open("clase.csv", 'w')
+except OSError:
+    print("Error: could not create 'clase.csv'.")
+    exit()
+
+salida.write("fila, clumna, iteraciones\n")
+
+# PROCESS
+try:
+    for fila in range(alto):
+        for columna in range(ancho):
+            real = config["real_min"] + (columna / ancho) * (config["real_max"] - config["real_min"])
+            imag = config["imag_min"] + (fila / alto) * (config["imag_max"] - config["imag_min"])
+            c = complex(real, imag)
+
+            z = 0 + 0j
+            iteraciones = 0
+
+            while (abs(z) <= 2) and (iteraciones < max_iter):
+                z = z * z + c
+                iteraciones += 1
+
+            #OUTPUT
+            salida.write(f"{fila},{columna},{iteraciones}\n")
+
+except KeyError as e:
+    print(f"Error: missing key {e} in 'config.txt'.")
+
 except ZeroDivisionError:
-    print("Error Matemático: Se detectó un intento de división por cero al calcular los límites.")
+    print("Error: 'ancho' or 'alto' cannot be zero.")
+
 except Exception as e:
-    print(f"Ocurrió un error inesperado al procesar el programa: {e}")
+    print(f"Unexpected error while computing the Mandelbrot set: {e}")
+
+finally:
+    salida.close()
+
+print("DONE")
