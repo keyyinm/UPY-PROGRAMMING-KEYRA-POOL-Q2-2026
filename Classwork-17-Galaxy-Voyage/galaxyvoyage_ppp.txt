@@ -1,0 +1,79 @@
+GALAXY VOYAGE
+PPP (Pseudocode Programming Process)
+
+---
+
+## INPUT
+
+Read the configuration values from config.txt
+
+- Window width
+- Window height
+- Background color
+- Line color
+- Number of vertical lines
+- Number of horizontal lines
+- Space between vertical lines
+
+---
+
+## PROCESS
+
+Create an empty dictionary called config.
+
+Open config.txt.
+
+For each line in the file:
+
+    Read the parameter and its value.
+
+    If the value contains commas:
+        Convert it into a tuple of integers.
+
+    Else if the value contains a decimal point:
+        Convert it into a floating-point number.
+
+    Else:
+        Convert it into an integer.
+
+Calculate the vanishing point using the window dimensions.
+
+Initialize pygame.
+
+Create the application window.
+
+Calculate the X positions of the vertical lines.
+
+Calculate the Y positions of the horizontal lines.
+
+Set running = True.
+
+WHILE running is True
+
+    Process all pygame events.
+
+    IF the user closes the window THEN
+
+        Set running = False
+
+    END IF
+
+    Fill the screen with the configured background color.
+
+    Draw all perspective vertical lines from the vanishing point.
+
+    Calculate the intersections needed for the perspective effect.
+
+    Draw all perspective horizontal lines.
+
+    Update the display.
+
+END WHILE
+
+Close pygame.
+
+---
+
+## OUTPUT
+
+Display a window showing a perspective grid with vertical and horizontal lines converging toward a vanishing point. The application remains open until the user closes the window.
